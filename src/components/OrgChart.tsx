@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { OrganizationChart } from "primereact/organizationchart"
 import TreeNode from "primereact/treenode"
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
+import Grid from "@mui/material/Unstable_Grid2/Grid2"
+import { Typography } from "@mui/material"
 
 const tempData = [
   {
@@ -9,54 +11,47 @@ const tempData = [
     className: "bg-indigo-500 text-white",
     style: { borderRadius: "12px" },
     data: {
-      image: "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
-      name: "Amy Elsner",
-      title: "CEO",
+      department: "대표",
+      leader: "이대표",
+      // image: "https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png",
+      // name: "Amy Elsner",
+      // title: "CEO",
     },
     children: [
       {
         expanded: true,
-        className: "bg-purple-500 text-white",
+        // className: "text-white",
         style: { borderRadius: "12px" },
         data: {
-          image: "https://primefaces.org/cdn/primereact/images/avatar/annafali.png",
-          name: "Anna Fali",
-          title: "CMO",
+          department: "인사팀",
+          leader: "이인사",
+          members: ["이인사1", "이인사2"],
+          // image: "https://primefaces.org/cdn/primereact/images/avatar/annafali.png",
+          // name: "Anna Fali",
+          // title: "CMO",
         },
-        children: [
-          {
-            label: "Sales",
-            className: "bg-purple-500 text-white",
-            style: { borderRadius: "12px" },
-          },
-          {
-            label: "Marketing",
-            className: "bg-purple-500 text-white",
-            style: { borderRadius: "12px" },
-          },
-        ],
+        // children: [
+        //   {
+        //     label: "Sales",
+        //     className: "bg-purple-500 text-white",
+        //     style: { borderRadius: "12px" },
+        //   },
+        //   {
+        //     label: "Marketing",
+        //     className: "bg-purple-500 text-white",
+        //     style: { borderRadius: "12px" },
+        //   },
+        // ],
       },
       {
         expanded: true,
-        className: "bg-teal-500 text-white",
+        // className: "text-white",
         style: { borderRadius: "12px" },
         data: {
-          image: "https://primefaces.org/cdn/primereact/images/avatar/stephenshaw.png",
-          name: "Stephen Shaw",
-          title: "CTO",
+          department: "개발팀",
+          leader: "이개발",
+          members: ["이개발1", "이개발2"],
         },
-        children: [
-          {
-            label: "Development",
-            className: "bg-teal-500 text-white",
-            style: { borderRadius: "12px" },
-          },
-          {
-            label: "UI/UX Design",
-            className: "bg-teal-500 text-white",
-            style: { borderRadius: "12px" },
-          },
-        ],
       },
     ],
   },
@@ -65,27 +60,26 @@ export default function OrgChart() {
   const [data] = useState<TreeNode[]>(tempData)
 
   const nodeTemplate = (node: TreeNode) => {
-    if (node?.data?.name) {
-      return (
-        <div className="flex flex-column">
-          <div className="flex flex-column align-items-center">
-            <img alt={node.data.name} src={node.data.image} className="mb-3 w-3rem h-3rem" />
-            <span className="font-bold mb-2">{node.data.name}</span>
-            <span>{node.data.title}</span>
-          </div>
-        </div>
-      )
-    }
-    return node.label
+    return (
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid xs={12}>
+          <Typography>{node.data.department}</Typography>
+        </Grid>
+        <Grid>{node.data?.leader}</Grid>
+        {node.data?.members && (
+          <Grid xs={6}>
+            {node.data.members.map(member => (
+              <div>{member}</div>
+            ))}
+          </Grid>
+        )}
+      </Grid>
+    )
   }
 
   return (
-    <TransformWrapper>
-      <TransformComponent>
-        <div className="card">
-          <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
-        </div>
-      </TransformComponent>
-    </TransformWrapper>
+    <div className="card">
+      <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
+    </div>
   )
 }
