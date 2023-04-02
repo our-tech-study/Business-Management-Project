@@ -9,9 +9,14 @@ function App() {
   return (
     <Grid container>
       <Grid xs={12} justifyContent="space-between">
-        <Grid container justifyContent={"space-between"}>
+        <Grid container justifyContent={"space-between"} alignItems={"center"}>
           <Grid>
-            <Button variant="outlined">설정</Button>
+            <Stack direction="row" spacing={1}>
+              <Button variant="outlined">신규</Button>
+              <Button variant="outlined">선택삭제</Button>
+              <Button variant="outlined">초기화</Button>
+              <Button variant="outlined">설정</Button>
+            </Stack>
           </Grid>
           <Grid>
             <Stack spacing={2}>

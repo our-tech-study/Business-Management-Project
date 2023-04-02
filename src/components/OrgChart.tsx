@@ -1,14 +1,13 @@
 import React, { useState } from "react"
 import { OrganizationChart } from "primereact/organizationchart"
 import TreeNode from "primereact/treenode"
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import Grid from "@mui/material/Unstable_Grid2/Grid2"
 import { Typography } from "@mui/material"
 
 const tempData = [
   {
     expanded: true,
-    className: "bg-indigo-500 text-white",
+    // className: "bg-indigo-500 text-white",
     style: { borderRadius: "12px" },
     data: {
       department: "대표",
@@ -56,30 +55,45 @@ const tempData = [
     ],
   },
 ]
+// https://primereact.org/organizationchart/
 export default function OrgChart() {
   const [data] = useState<TreeNode[]>(tempData)
 
   const nodeTemplate = (node: TreeNode) => {
-    return (
-      <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid xs={12}>
-          <Typography>{node.data.department}</Typography>
-        </Grid>
-        <Grid>{node.data?.leader}</Grid>
-        {node.data?.members && (
-          <Grid xs={6}>
-            {node.data.members.map(member => (
-              <div>{member}</div>
-            ))}
-          </Grid>
-        )}
-      </Grid>
-    )
+    return <OrganizationNode data={node.data} />
   }
 
   return (
     <div className="card">
       <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
     </div>
+  )
+}
+
+interface IOrganizationNodeProps {
+  data: {
+    department: string
+    leader?: string
+    members?: string[]
+  }
+}
+function OrganizationNode({ data }: IOrganizationNodeProps) {
+  const { department, leader, members } = data
+
+  const onClickMember = () => {}
+  return (
+    <Grid container spacing={2} justifyContent="center" alignItems="center">
+      <Grid xs={12} sx={{ borderBottom: "1px solid black" }}>
+        <Typography>{department}</Typography>
+      </Grid>
+      <Grid>{leader}</Grid>
+      {members && (
+        <Grid xs={6}>
+          {members.map(member => (
+            <div onClick={onClickMember}>{member}</div>
+          ))}
+        </Grid>
+      )}
+    </Grid>
   )
 }
