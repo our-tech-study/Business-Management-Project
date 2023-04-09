@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { OrganizationChart } from "primereact/organizationchart"
 import TreeNode from "primereact/treenode"
 import Grid from "@mui/material/Unstable_Grid2/Grid2"
-import { Typography } from "@mui/material"
+import { Box, Menu, MenuItem, Typography } from "@mui/material"
+import Layer from "./Layer"
 
 const tempData = [
   {
@@ -55,17 +56,41 @@ const tempData = [
     ],
   },
 ]
+
+const commonLayerItems = [
+  { id: "profile", label: "프로필보기" },
+  { id: "schedule", label: "일정관리" },
+]
+const leaderLayerItems = commonLayerItems.concat({ id: "evaluationByLeader", label: "인사평가(팀장)" })
+const memberLayerItems = commonLayerItems.concat({ id: "evaluationByMember", label: "인사평가(팀원)" })
 // https://primereact.org/organizationchart/
 export default function OrgChart() {
   const [data] = useState<TreeNode[]>(tempData)
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [items, setItems] = useState(leaderLayerItems)
+  const open = Boolean(anchorEl)
+  const onMemberClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setItems(memberLayerItems)
+    setAnchorEl(event.currentTarget)
+  }
 
+  const onLeaderClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setItems(leaderLayerItems)
+    setAnchorEl(event.currentTarget)
+  }
+  const onClose = () => {
+    setAnchorEl(null)
+  }
+
+  const onSelect = () => {}
   const nodeTemplate = (node: TreeNode) => {
-    return <OrganizationNode data={node.data} />
+    return <OrganizationNode data={node.data} onMemberClick={onMemberClick} onLeaderClick={onLeaderClick} />
   }
 
   return (
     <div className="card">
       <OrganizationChart value={data} nodeTemplate={nodeTemplate} />
+      <Layer anchorEl={anchorEl} items={items} onClose={onClose} onSelect={onSelect} open={open} />
     </div>
   )
 }
@@ -76,21 +101,26 @@ interface IOrganizationNodeProps {
     leader?: string
     members?: string[]
   }
+  onLeaderClick: any
+  onMemberClick: any
 }
-function OrganizationNode({ data }: IOrganizationNodeProps) {
+function OrganizationNode({ data, onMemberClick, onLeaderClick }: IOrganizationNodeProps) {
   const { department, leader, members } = data
 
-  const onClickMember = () => {}
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid xs={12} sx={{ borderBottom: "1px solid black" }}>
         <Typography>{department}</Typography>
       </Grid>
-      <Grid>{leader}</Grid>
+      <Grid>
+        <Box onClick={onLeaderClick}>{leader}</Box>
+      </Grid>
       {members && (
         <Grid xs={6}>
           {members.map(member => (
-            <div onClick={onClickMember}>{member}</div>
+            <Box sx={{ marginY: 1 }} onClick={onMemberClick}>
+              {member}
+            </Box>
           ))}
         </Grid>
       )}
