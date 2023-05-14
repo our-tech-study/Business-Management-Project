@@ -4,7 +4,7 @@ import React from "react"
 interface ILayerProps {
   open: boolean
   onClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void
-  onSelect: (id: string) => void
+  onSelect: (item: ILayerItem) => void
   anchorEl: HTMLElement | null
   items: ILayerItem[]
 }
@@ -19,24 +19,25 @@ function Layer({ open, onClose, onSelect, anchorEl, items }: ILayerProps) {
         vertical: "center",
       }}>
       {items.map(item => (
-        <LayerItem item={item} onSelect={onSelect} />
+        <LayerItem key={item.id} item={item} onSelect={onSelect} />
       ))}
     </Menu>
   )
 }
 
-interface ILayerItem {
+export interface ILayerItem {
   id: string
   label: string
+  [key: string]: any
 }
 interface ILayerItemProps {
   item: ILayerItem
-  onSelect: (id: string) => void
+  onSelect: (item: ILayerItem) => void
 }
 function LayerItem({ item, onSelect }: ILayerItemProps) {
   const { id, label } = item
   const onClick = () => {
-    onSelect(id)
+    onSelect(item)
   }
   return <MenuItem onClick={onClick}>{label}</MenuItem>
 }

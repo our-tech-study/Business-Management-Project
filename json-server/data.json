@@ -1,0 +1,26 @@
+{
+  "organization": [
+    {
+      "department": "대표",
+      "leader": { "id": "1", "name": "이대표" },
+      "children": [
+        {
+          "department": "인사팀",
+          "leader": { "id": "2", "name": "이인사" },
+          "members": [
+            { "id": "3", "name": "이인사1" },
+            { "id": "4", "name": "이인사2" }
+          ]
+        },
+        {
+          "department": "개발팀",
+          "leader": { "id": "2", "name": "이개발" },
+          "members": [
+            { "id": "3", "name": "이개발1" },
+            { "id": "4", "name": "이개발2" }
+          ]
+        }
+      ]
+    }
+  ]
+}
