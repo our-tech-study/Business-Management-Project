@@ -23,5 +23,8 @@
       ]
     }
   ],
-  "daily": [{ "id": "1", "status": "ing", "label": "프로젝트 A" }]
+  "daily": [
+    { "id": "1", "status": "ing", "label": "프로젝트 A" },
+    { "id": "2", "status": "ing", "label": "프로젝트 B" }
+  ]
 }
