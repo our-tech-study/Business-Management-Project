@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import PauseCircleIcon from "@mui/icons-material/PauseCircle"
 import StopIcon from "@mui/icons-material/Stop"
-import { useDaily } from "@lib/hooks/query/dailyQuery"
-import { Alert, Divider, List, ListItem, ListItemButton, ListItemText, Box, Grid, Menu, Paper, IconButton, Typography, ListItemIcon } from "@mui/material"
+import { useDaily, useDailyMutation } from "@lib/hooks/query/dailyQuery"
+import { Button, Divider, List, ListItem, ListItemButton, ListItemText, Box, Grid, Menu, Paper, IconButton, Typography, ListItemIcon } from "@mui/material"
 import { showAlert } from "@store/root"
+import { createJob } from "@lib/api/dailyApi"
 
 function DailyContainer() {
   const [currentJobId, setCurrentJobId] = useState<string | null>(null)
+
   return (
     <Box>
       <Grid container></Grid>
@@ -24,11 +26,30 @@ function DailyContainer() {
             <StopContainer />
           </Grid>
         </Grid>
+        <DailyJobContainer />
       </Paper>
     </Box>
   )
 }
 
+function DailyJobContainer() {
+  const [label, setLabel] = useState("")
+  const dailyJobMutation = useDailyMutation()
+
+  const onCreateJob = () => {
+    dailyJobMutation.mutate({ label })
+  }
+
+  const onChangeLabel = e => {
+    setLabel(e.target.value)
+  }
+  return (
+    <>
+      <input onChange={onChangeLabel} value={label} />
+      <Button onClick={onCreateJob}>잡 생성</Button>
+    </>
+  )
+}
 export default DailyContainer
 
 function PlayContainer() {
