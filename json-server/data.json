@@ -2,29 +2,67 @@
   "organization": [
     {
       "department": "대표",
-      "leader": { "id": "1", "name": "이대표" },
+      "leader": {
+        "id": "1",
+        "name": "이대표"
+      },
       "children": [
         {
           "department": "인사팀",
-          "leader": { "id": "2", "name": "이인사" },
+          "leader": {
+            "id": "2",
+            "name": "이인사"
+          },
           "members": [
-            { "id": "3", "name": "이인사1" },
-            { "id": "4", "name": "이인사2" }
+            {
+              "id": "3",
+              "name": "이인사1"
+            },
+            {
+              "id": "4",
+              "name": "이인사2"
+            }
           ]
         },
         {
           "department": "개발팀",
-          "leader": { "id": "2", "name": "이개발" },
+          "leader": {
+            "id": "2",
+            "name": "이개발"
+          },
           "members": [
-            { "id": "3", "name": "이개발1" },
-            { "id": "4", "name": "이개발2" }
+            {
+              "id": "3",
+              "name": "이개발1"
+            },
+            {
+              "id": "4",
+              "name": "이개발2"
+            }
           ]
         }
       ]
     }
   ],
   "daily": [
-    { "id": "1", "status": "ing", "label": "프로젝트 A" },
-    { "id": "2", "status": "ing", "label": "프로젝트 B" }
+    {
+      "id": "1",
+      "status": "ing",
+      "label": "프로젝트 A"
+    },
+    {
+      "id": "2",
+      "status": "ing",
+      "label": "프로젝트 B"
+    },
+    {
+      "id": "56423028",
+      "status": "stop"
+    },
+    {
+      "id": "31314554",
+      "status": "stop",
+      "label": "12355"
+    }
   ]
 }
