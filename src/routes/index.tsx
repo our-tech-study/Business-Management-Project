@@ -8,7 +8,6 @@ import LoginPage from "@pages/LoginPage"
 import DailyPage from "@pages/DailyPage"
 import SettingPage from "@pages/SettingPage"
 
-
 export const ROOT_PATH = "/"
 
 export const LOGIN_PATH = "/login"
@@ -43,8 +42,8 @@ export const router = createBrowserRouter([
     path: `${DAILY_PATH}`,
     element: <DailyPage />,
   },
-  // {
-  //   path: `${SETTING_PATH}${MEMBER_DYNAMIC_PATH}`,
-  //   element: <SettingPage />,
-  // },
+  {
+    path: `${SETTING_PATH}${MEMBER_DYNAMIC_PATH}`,
+    element: <SettingPage />,
+  },
 ])

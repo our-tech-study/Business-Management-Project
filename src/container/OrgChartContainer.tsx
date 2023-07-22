@@ -2,7 +2,7 @@ import OrgChart from "@components/OrgChart"
 import { MemberIdType } from "@lib/api/orgApi"
 import { useOrganization } from "@lib/hooks/query/organizationQuery"
 import { PROFILE_PATH } from "@routes/index"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 
 export default function OrgChartContainer() {
   const { data, isLoading } = useOrganization()
