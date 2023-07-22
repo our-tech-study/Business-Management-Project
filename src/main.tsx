@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { Provider } from "react-redux"
-import { RouterProvider } from "react-router"
+import { RouterProvider } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "react-query"
 import "primereact/resources/themes/lara-light-indigo/theme.css" // theme
 import "primereact/resources/primereact.css" // core css
