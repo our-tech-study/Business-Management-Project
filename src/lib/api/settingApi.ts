@@ -13,7 +13,7 @@ export interface ISetting {
   id: SettingId
   name: string
 }
-export const fetchOrganization = async (id): Promise<AxiosResponse<ISettingResponse[], any>> => {
-  const result = await http.get(`${API_URL}/setting/${id}`)
+export const fetchSetting = async (): Promise<AxiosResponse<ISettingResponse[], any>> => {
+  const result = await http.get(`${API_URL}/setting`)
   return result
 }
