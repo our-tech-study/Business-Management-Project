@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 // 외부모듈
 import { createBrowserRouter } from "react-router-dom"
-import App from "App"
 import MainPage from "@pages/MainPage"
 import ProfilePage from "@pages/ProfilePage"
 import LoginPage from "@pages/LoginPage"
